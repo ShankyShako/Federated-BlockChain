@@ -48,25 +48,3 @@ contract FederatedToken is ERC20 {
         return (update.nodeAddress, update.updateHash, update.timestamp);
     }
 }
-
-contract FederatedModelStorage {
-    mapping(address => string) public modelCIDs;
-    address[] public users;
-
-    constructor(){
-
-    }
-
-    function getUsers() external returns ( address[] memory ) {
-        return users;
-    } 
-    
-
-    function storeModelCID(string memory cid) public {
-        modelCIDs[msg.sender] = cid;
-        for ( uint i = 0; i < users.length; i++){
-            if ( users[ i ] == msg.sender ) return;
-        }
-        users.push( msg.sender );
-    }
-}
